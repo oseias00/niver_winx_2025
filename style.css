@@ -1,6 +1,6 @@
 body {
   background: linear-gradient(to bottom, #ffc0cb, #ffe6f0);
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-family: 'Quicksand', sans-serif;
   margin: 0;
   padding: 0;
   color: #4b004b;
@@ -90,14 +90,15 @@ footer {
   border-right: .15em solid pink;
   white-space: nowrap;
   animation:
-    typing 3s steps(30, end),
+    typing 3s steps(30, end) forwards,
     blink-caret .75s step-end infinite;
   width: 0;
+  max-width: 100%;
 }
 
 @keyframes typing {
   from { width: 0 }
-  to { width: 100% }
+  to { width: 18ch }
 }
 
 @keyframes blink-caret {
@@ -232,7 +233,7 @@ footer {
   font-size: 1rem;
   cursor: pointer;
   transition: transform 0.2s ease, background 0.3s ease;
-  font-family: 'Comic Sans MS', cursive;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .e-se-botoes button:hover {
@@ -246,4 +247,42 @@ footer {
   font-size: 1.1rem;
   color: #b30059;
   text-align: center;
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  p, li, button {
+    font-size: 1rem;
+  }
+
+  .carta, .lista-fofa {
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  .galeria-grid img {
+    width: 100%;
+    max-width: 160px;
+  }
+
+  button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+.msgfinal {
+
+  font-family: 'Comic Sans MS', cursive;
 }
