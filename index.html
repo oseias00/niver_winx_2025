@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feliz Aniversário, Winx! 🎂</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .tela-entrada {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffc0cb, #ffe6f0);
+      text-align: center;
+      padding: 20px;
+    }
+
+    .tela-entrada h2 {
+      font-size: 2rem;
+      color: #b30059;
+    }
+
+    .tela-entrada p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .tela-entrada button {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease;
+    }
+
+    .tela-entrada button:hover {
+      transform: scale(1.05);
+    }
+
+    .fade-in {
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="particles-js"></div>
+  <div id="entrada" class="tela-entrada">
+    <h2 class="digitando">Oii Bruna 😘</h2>
+    <p>Fiz algo especial pra você...</p>
+    <button onclick="mostrarConteudo()">Descobrir a surpresa 💌</button>
+  </div>
+
+  <div id="conteudo" class="container" style="display: none;">
+    <h1>🎉 Feliz Aniversário, Winx! 🎉</h1>
+    <p>Hoje é o dia da princesa mais linda e miruda desse planeta!</p>
+    <p>🩷</p>
+
+    <section id="galeria">
+      <h2>🖼️ Nossos Momentos KKKK</h2>
+      <div class="galeria-grid">
+        <img src="images/WhatsApp Image 2025-05-15 at 21.32.45.jpeg" alt="Momento 1" />
+        <img src="images/WhatsApp Image 2025-05-15 at 21.20.31 (1).jpeg" alt="Momento 2" />
+        <img src="images/WhatsApp Image 2025-05-15 at 21.20.29.png" alt="Momento 3" />
+      </div>
+    </section>
+
+    <section class="carta">
+      <h2>💌 Uma Cartinha Especial</h2>
+      <p>Você é a melhor pessoa que eu podia ter conhecido na minha vida.</p>
+      <p>A conexão que criamos é muito especial e única, e sempre vai ser, você sabe. Eu sou muito grato por ter você na minha vida, e espero que esse dia te traga muita alegria e que você aproveite bastante. Que seu futuro seja cheio de conquistas e momentos incríveis! Sempre estarei aqui e pode contar comigo pra tudo que precisar.</p>
+      <p>Ass: Seu duo no jogo e na vida 💖</p>
+    </section>
+
+    <section class="lista-fofa">
+      <h2>✨ Coisas que amo e admiro em você  </h2>
+      <ul>
+        <li>Seu jeitinho de esquizofrenica</li>
+        <li>Seu gosto musical (as vezes)</li>
+        <li>Seu esforço nos estudos e em tudo que você faz</li>
+        <li>Como você sempre me alegra quando ta comigo conversando, vendo filme, jogando ou qualquer coisa que seja.</li>
+      </ul>
+    </section>
+
+    <section id="e-se" class="container">
+  <h2>💭 E se...</h2>
+
+  <div class="e-se-botoes">
+    <button onclick="responder('antes')">E se eu tivesse te conhecido antes?</button>
+    <button onclick="responder('perto')">E se a gente morasse pertinho?</button>
+    <button onclick="responder('valorant')">E se você fosse um personagem do valorant?</button>
+  </div>
+
+  <div id="resposta-e-se" class="resposta-e-se"></div>
+</section>
+
+    <section id="jogo-coracoes-container" class="container">
+  <h2>💖 Aimlab dos Corações 💖</h2>
+  <h4>Objetivo: 20 pontos</h4>
+  <button id="btn-iniciar">Iniciar Jogo</button>
+
+  <div id="jogo-coracoes" style="display:none;">
+    <div id="placar">Pontuação: 0</div>
+  </div>
+</section>
+
+<button id="botao-surpresa" aria-expanded="false" aria-controls="mensagem-surpresa">
+    🎁 Clique aqui pra uma surpresa!
+  </button>
+  <div id="mensagem-surpresa" role="region" aria-live="polite">
+    <p>Você é a minha pessoa favorita no mundo. Nunca esqueça o quanto você é especial! 💖</p>
+    <p>te amo<br>pronto agora acabou, volta pro zap pra falar comigo</p>
+  </div>
+
+  <footer>
+    <p>“para a minha winx favorita 🩷”</p>
+  </footer>
+</div>
+
+  <script>
+  const btnIniciar = document.getElementById('btn-iniciar');
+  const jogo = document.getElementById('jogo-coracoes');
+  const placarEl = document.getElementById('placar');
+  let pontos = 0;
+  let criarCoracoesInterval;
+
+  function criaCoracao() {
+    const heart = document.createElement('span');
+    heart.className = 'coracao';
+    heart.textContent = '❤️';
+
+    heart.style.left = Math.random() * (jogo.clientWidth - 30) + 'px';
+    heart.style.top = Math.random() * (jogo.clientHeight - 40) + 'px';
+
+    const duracao = 5000 + Math.random() * 3000;
+    heart.style.animationDuration = duracao + 'ms';
+
+    heart.addEventListener('click', () => {
+      pontos++;
+      placarEl.textContent = `Pontuação: ${pontos}`;
+
+      heart.remove();
+
+      if (pontos >= 20) {
+        encerraJogo();
+      }
+    });
+
+    jogo.appendChild(heart);
+
+    setTimeout(() => {
+      if (heart.parentNode) {
+        heart.remove();
+      }
+    }, duracao);
+  }
+
+  function encerraJogo() {
+    clearInterval(criarCoracoesInterval);
+
+    const coracoes = document.querySelectorAll('.coracao');
+    coracoes.forEach(coracao => coracao.remove());
+
+    const mensagemFim = document.createElement('div');
+    mensagemFim.innerHTML = "🎉 Parabéns! pina muito! 🎉<br> <br>eu já sou seu prêmio rs";
+    mensagemFim.style.fontSize = '1.5rem';
+    mensagemFim.style.color = '#ff1493';
+    mensagemFim.style.marginTop = '1rem';
+    mensagemFim.style.fontWeight = 'bold';
+    jogo.appendChild(mensagemFim);
+  }
+
+  btnIniciar.addEventListener('click', () => {
+    btnIniciar.style.display = 'none';
+    jogo.style.display = 'block';
+    pontos = 0;
+    placarEl.textContent = `Pontuação: ${pontos}`;
+    criarCoracoesInterval = setInterval(criaCoracao, 800);
+  });
+
+    function mostrarConteudo() {
+      document.getElementById('entrada').style.display = 'none';
+      const conteudo = document.getElementById('conteudo');
+      conteudo.style.display = 'block';
+      conteudo.classList.add('fade-in');
+    };
+
+  const btnSurpresa = document.getElementById('botao-surpresa');
+  const msgSurpresa = document.getElementById('mensagem-surpresa');
+
+  btnSurpresa.addEventListener('click', () => {
+    const visible = msgSurpresa.style.display === 'block';
+    if (visible) {
+      msgSurpresa.style.display = 'none';
+      btnSurpresa.setAttribute('aria-expanded', 'false');
+    } else {
+      msgSurpresa.style.display = 'block';
+      btnSurpresa.setAttribute('aria-expanded', 'true');
+    }
+  });
+    
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  const particles = [];
+  const maxParticles = 100;
+
+  function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  document.getElementById('particles-js').appendChild(canvas);
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.size = Math.random() * 2 + 1;
+      this.speedY = Math.random() * -0.5 - 0.2;
+      this.opacity = Math.random();
+    }
+    update() {
+      this.y += this.speedY;
+      if (this.y < 0) {
+        this.y = height;
+        this.x = Math.random() * width;
+      }
+    }
+    draw() {
+      ctx.fillStyle = `rgba(255, 105, 180, ${this.opacity})`;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  for(let i=0; i < maxParticles; i++) {
+    particles.push(new Particle());
+  }
+
+  function animate() {
+    ctx.clearRect(0,0,width,height);
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  function responder(tipo) {
+    const respostas = {
+      antes: "eu seria feliz a mais tempo",
+      perto: "eu me mudaria pra longe",
+      valorant: "vc ia ser uma reyna baiter"
+    };
+
+    const resposta = respostas[tipo];
+    const divResposta = document.getElementById('resposta-e-se');
+    divResposta.textContent = resposta;
+  }
+
+  </script>
+
+</body>
+</html>
